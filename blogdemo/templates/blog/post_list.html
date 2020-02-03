@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% block title %}
+<title>All Blogs</title>
+{% endblock %}
+{% block content %}
+    <br>
+    <h1>Blog List</h1>
+    <br>
+    <div>
+    <ul class="sidebar-nav">
+    {% for post in post_list %}
+        <li><a class="dropdown-item" href="{{ post.get_absolute_url }}"><span style="font-size: 1.2em">{{ post.title }}</span></a></li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endblock %}

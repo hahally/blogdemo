@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block title %}
+<title>{{ post.title }}</title>
+{% endblock %}
+{% block content %}
+    <br>
+    <div class="blog-post" >
+        <div>
+            <h2 class="blog-post-title">{{ post.title }}</h2>
+            <br>
+            <p>Mark：<a href="{{ post.get_tag_url }}">{{ post.tag }} </a></p>
+            {#        Django 模板过滤器#}
+            <p>Reading：<span>{{ post.get_visits }}</span></p>
+            <p class="blog-post-meta">{{ post.pub_date|date:'D d M Y'}} By <a href="{% url 'blog:about' %}">{{ post.auth }}</a></p>
+        </div>
+        <div class="catalog">
+            {{ post.get_toc|safe }}
+        </div>
+        <article>
+{#            加上 safe 过滤器 防止 html 代码转义#}
+            {{ post.get_content_as_markdown|safe }}
+        </article>
+    </div>
+    <br>
+    <div>
+        <p><span>最近修改：{{ post.up_date }}</span></p>
+    </div>
+{% endblock %}

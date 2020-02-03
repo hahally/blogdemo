@@ -1,0 +1,63 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <script>
+        function showimg() {
+            var a = document.getElementById("img-a");
+            a.innerHTML = '<br><img src="{% static 'blog/images/7.jpg' %}" >';
+        }
+    </script>
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+        <h4 class="display-4 font-italic" style="font-size: 3.1em">Welcome to Hahally's Blog</h4>
+        <p class="lead my-3">Number of visits : &nbsp;<span>{{ visits }}</span></p>
+        <p class="lead mb-0"><a href="#" id="img-a" onclick="showimg()" class="text-white font-weight-bold">Continue reading...</a></p>
+    </div>
+</div>
+<div class="row mb-2">
+    {% for post in contacts %}
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ post.tag }}</strong>
+          <h3 class="mb-0">{{ post.title }}</h3>
+          <div class="mb-1 text-muted">{{ post.pub_date|date:'l d M Y'}}</div>
+          <p class="card-text mb-auto">{{ post.desc}}</p>
+          <a href="{{ post.get_absolute_url }}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#55595c"></rect>
+              <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+              {{ post.id }}
+              </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="pagination-index">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if contacts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo; first</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ contacts.previous_page_number }}">previous</a>
+        </li>
+      {% endif %}
+        {% if contacts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ contacts.next_page_number }}">next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}
+<title>About Me</title>
+    <script>
+    function showimg() {
+        var a = document.getElementById("img-a");
+        a.innerHTML = '<br><img src="{% static 'blog/images/8.jpg' %}" >';
+    }
+    </script>
+{% endblock %}
+{% block content %}
+    <br>
+    <br>
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+        <h1 class="display-4 font-italic">个人简介</h1>
+        <p>{{ auth.name }}</p>
+        <p class="lead my-3">
+            大三学生，2020 年将会被消灭<br><br>
+            咸鱼本人，立志做一条<strong>高盐值</strong>的咸鱼。
+            会各种热门语言的 <code>Hello World!</code>
+            没事喜欢写 <code>BUG</code>，然后自己改 <code>BUG</code>，让本就无聊的时光变得索然无聊。
+            2020 年，努力做个 <code>Dj</code>，面对考研，适当的挣扎。<br>
+        </p>
+        <p class="lead mb-0">
+            <a href="#" id="img-a" class="text-white font-weight-bold" onclick="showimg()">
+                Learning more...
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock %}
